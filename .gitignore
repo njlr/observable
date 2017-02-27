@@ -7,3 +7,7 @@
 # The default out of source build folder
 build/
 .vs/
+
+buck-out/
+.buckd/
+.buckconfig.local

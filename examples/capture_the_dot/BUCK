@@ -1,0 +1,12 @@
+cxx_binary(
+  name = 'capture_the_dot', 
+  headers = subdir_glob([
+    ('src', '*.h'),
+  ]),
+  srcs = glob([
+    'src/*.cpp',
+  ]),
+  deps = [
+    '//:observable',
+  ],
+)

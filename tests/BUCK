@@ -1,0 +1,38 @@
+genrule(
+  name = 'shared_export',
+  cmd = 'echo \'#define SHARED_EXPORT\' > $OUT',
+  out = 'shared_export.h',
+)
+
+cxx_library(
+  name = 'shared_lib',
+  header_namespace = '',
+  exported_headers = { 
+    'shared/shared_lib.h': 'shared_lib/include/shared/shared_lib.h',
+    'shared_export.h': ':shared_export',
+  },
+  srcs = glob([
+    'shared_lib/src/**/*.cpp',
+  ]), 
+  deps = [
+    '//:observable',
+    ':shared_export',
+  ],
+  compiler_flags = [
+    '-std=c++14',
+  ],
+)
+
+cxx_test(
+  name = 'observable_test',
+  srcs = glob([
+    'src/**/*.cpp',
+  ]),
+  compiler_flags = [
+    '-std=c++14', 
+  ],
+  deps = [
+    '//:observable',
+    ':shared_lib',
+  ]
+)

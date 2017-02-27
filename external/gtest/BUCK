@@ -1,0 +1,25 @@
+cxx_library(
+  name = 'googletest',
+  header_namespace = '',
+  srcs = [
+    'src/gtest-all.cc',
+    'src/gtest_main.cc',
+  ],
+  headers = subdir_glob([
+    ('', 'src/*.h'),
+    ('', 'src/*.cc'),
+  ]),
+  exported_headers = subdir_glob([
+    ('include/gtest', '**/*.h'),
+    ('include', '**/*.h'),
+  ]),
+  preprocessor_flags = [
+    '-U_STRICT_ANSI_',
+  ],
+  compiler_flags = [
+    '-std=c++14', 
+  ],
+  visibility = [
+    'PUBLIC',
+  ],
+)
